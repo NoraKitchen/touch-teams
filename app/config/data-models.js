@@ -37,12 +37,44 @@
                             foreignKey: 'sportId'
                         }
                     },
-                    // hasMany: {
-                    //     teams: {
-                    //         localField: 'teams',
-                    //         foreignKey: 'teamId'
-                    //     }
-                    // }
+                    hasMany: {
+                        teams: {
+                            localField: 'teams',
+                            foreignKey: 'teamId'
+                        }
+                    }
+                }
+            })
+            
+            ms.Team = DS.defineResource({
+                name: 'team',
+                endpoint: 'teams',
+                relationships: {
+                        belongsTo: {
+                            league: {
+                                localField: 'league',
+                                foreignKey: 'leagueId'
+                            }
+                        },
+                        hasMany: {
+                            players: {
+                                localField: 'players',
+                                foreignKey: 'playerId'
+                            }
+                        }
+                }
+            })
+            
+            ms.Player = DS.defineResource({
+                name: 'player',
+                endpoint: 'players',
+                relationships: {
+                    belongsTo: {
+                        team: {
+                            localField: 'team',
+                            foreignKey: 'teamId'
+                        }
+                    }
                 }
             })
             
